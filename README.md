@@ -25,6 +25,22 @@ Trade with a villager until an offer runs out of stock, and a floating label app
 
 The item name shown is the meaningful half of the trade: whichever side of the deal isn't emeralds.
 
+## Why this exists
+
+**This is not an infinite-trading data pack.**
+
+Most data packs in this space solve villager trade limits by removing them — instant restocks, unlimited uses, no cooldown at all. That works, but it deletes the villager economy along with the inconvenience. Trade limits are a deliberate part of the game's balance, and once they are gone, emeralds stop meaning anything.
+
+This pack is for players who want to keep that balance intact. Nothing here alters trading in any way: stock limits, restock timing, prices and demand all behave exactly as vanilla intends. Install it and the game plays the same as it did before.
+
+What it fixes is not the mechanic — it is the missing feedback.
+
+Vanilla tells you a trade is sold out, and then tells you nothing else. There is no indication of when that villager will restock, whether it is even able to restock, or whether standing around waiting will accomplish anything. So you guess. You come back too early, or too late, or you wait next to a villager that was never going to restock because it has no job block.
+
+All of that information already exists inside the game. This pack simply surfaces it, one label at a time.
+
+**In short:** this is an information tool, not a balance change. Your trades stay exactly as hard as Mojang made them — you just stop having to guess.
+
 ## How the countdown works
 
 Minecraft does not expose a "time until restock" value, because restocking is not on a timer — a villager restocks by *working at its job site block*, up to twice a day.
@@ -83,6 +99,16 @@ Data pack สำหรับ Minecraft Java 1.21+ ที่แสดงป้า
 - นับถอยหลังจากค่าจริงในเกม (`LastRestock` / `RestocksToday`) ไม่ใช่ตัวเลขที่ตั้งเอง
 - ไม่ไปยุ่งกับกลไก restock ของเกมเลย แค่เฝ้าดูแล้วรายงาน
 - ใช้ได้กับ vanilla ล้วน ไม่ต้องลง mod และถ้าเล่นในเซิร์ฟเวอร์ ลงแค่ฝั่งเซิร์ฟเวอร์พอ
+
+**นี่ไม่ใช่ datapack สำหรับเทรดไม่จำกัด (Infinity Trade)**
+
+datapack ส่วนใหญ่ที่แก้ปัญหาเรื่อง limit การเทรด มักใช้วิธีถอด limit ทิ้งไปเลย ซึ่งมันแก้ปัญหาได้จริง แต่ก็ทำลายระบบเศรษฐกิจของเกมไปด้วย พอเทรดได้ไม่จำกัด emerald ก็ไม่มีค่าอะไรอีกต่อไป
+
+ตัวนี้ทำสำหรับคนที่อยากเก็บความสมดุลตรงนั้นไว้ — ไม่แตะกลไกการเทรดเลยแม้แต่นิดเดียว ทั้ง limit, เวลา restock, ราคา และ demand ยังทำงานตามที่เกมออกแบบมาทุกอย่าง
+
+สิ่งที่มันแก้ไม่ใช่ตัวกลไก แต่คือ**ข้อมูลที่เกมไม่เคยบอกเรา** — vanilla บอกแค่ว่าของหมด แล้วก็เงียบ ไม่บอกว่าจะกลับมาเมื่อไหร่ ไม่บอกว่ามันจะกลับมาได้ไหม หรือรอไปก็เท่านั้นเพราะ villager ตัวนั้นไม่มีที่ทำงานตั้งแต่แรก เราเลยต้องเดาเอาเอง
+
+ข้อมูลพวกนี้มีอยู่ในเกมอยู่แล้ว datapack นี้แค่เอามันขึ้นมาแสดงให้เห็น
 
 **ติดตั้ง**: ก๊อปโฟลเดอร์ `villager_cooldown` ไปวางใน `<เวิลด์>/datapacks/` แล้วพิมพ์ `/reload` ในเกม
 

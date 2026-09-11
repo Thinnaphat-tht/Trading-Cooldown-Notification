@@ -1,6 +1,6 @@
-# Trading Cooldown
+![Trading Cooldown](banner.png)
 
-<img src="cover.png" width="180" align="right" alt="Trading Cooldown icon">
+# Trading Cooldown
 
 A vanilla Minecraft data pack that puts a live status label above every villager whose trades have sold out, so you can tell at a glance which one is worth walking to.
 
@@ -9,8 +9,6 @@ No mods. No client install. Works on servers — only the server needs it.
 **Minecraft Java Edition 1.21+** (developed and tested on 26.2)
 
 > **Early demo.** This is the first working release, published so people can look at it and try it. Expect wording, behaviour, and structure to change as development continues.
-
-<br clear="right">
 
 ## What it does
 

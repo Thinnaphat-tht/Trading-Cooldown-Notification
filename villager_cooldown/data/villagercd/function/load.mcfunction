@@ -6,9 +6,9 @@ scoreboard objectives add vcd.const dummy
 
 scoreboard players set #20 vcd.const 20
 scoreboard players set #60 vcd.const 60
-# Villager work shift, in day-time ticks (vanilla schedule: work starts 2000, ends 6000)
+# Villager work shift, in day-time ticks (data/minecraft/timeline/villager_schedule.json: work 2000-9000)
 scoreboard players set #work_start vcd.const 2000
-scoreboard players set #work_end vcd.const 6000
+scoreboard players set #work_end vcd.const 9000
 scoreboard players set #next_start vcd.const 26000
 scoreboard players set #day_length vcd.const 24000
 

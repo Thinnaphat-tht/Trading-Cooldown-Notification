@@ -6,7 +6,7 @@ A vanilla Minecraft data pack that puts a live status label above every villager
 
 No mods. No client install. Works on servers — only the server needs it.
 
-**Minecraft Java Edition 1.21+** (developed and tested on 26.2)
+**Minecraft Java Edition 26.1+** (developed and tested on 26.2)
 
 > **Early demo.** This is the first working release, published so people can look at it and try it. Expect wording, behaviour, and structure to change as development continues.
 
@@ -93,7 +93,7 @@ Use it in your worlds and servers, take it apart to learn from, build your own v
 
 ## สรุปภาษาไทย
 
-Data pack สำหรับ Minecraft Java 1.21+ ที่แสดงป้ายลอยเหนือหัว villager ว่าของที่ขายหมดจะกลับมาเทรดได้เมื่อไหร่
+Data pack สำหรับ Minecraft Java 26.1 ขึ้นไป ที่แสดงป้ายลอยเหนือหัว villager ว่าของที่ขายหมดจะกลับมาเทรดได้เมื่อไหร่
 
 - นับถอยหลังจากค่าจริงในเกม (`LastRestock` / `RestocksToday`) ไม่ใช่ตัวเลขที่ตั้งเอง
 - ไม่ไปยุ่งกับกลไก restock ของเกมเลย แค่เฝ้าดูแล้วรายงาน

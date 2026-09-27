@@ -8,7 +8,9 @@ No mods. No client install. Works on servers — only the server needs it.
 
 **Minecraft Java Edition 26.1+** (developed and tested on 26.2)
 
-> **Early demo.** This is the first working release, published so people can look at it and try it. Expect wording, behaviour, and structure to change as development continues.
+![Demo: a villager's label counting down to Ready, then the Off work and Needs work states](demo.gif)
+
+> **Early development.** Expect wording, behaviour, and structure to change as development continues.
 
 ## What it does
 
@@ -23,6 +25,17 @@ Trade with a villager until an offer runs out of stock, and a floating label app
 | `✔ Ready` (green) | Restocked. You can trade again. |
 
 The item name shown is the meaningful half of the trade: whichever side of the deal isn't emeralds.
+
+### What to expect at each time of day
+
+Villagers only restock during their work shift, 08:00–15:00 in-game. For a villager whose trades are sold out:
+
+| In-game time | Label you should see |
+|---|---|
+| 07:00 (before work starts) | `☽ Off work` with under a minute left |
+| 12:00 (during work hours) | `⌛ Cooldown` or `⚒ Needs work` |
+| 16:00 | `☽ Off work`, about 13 minutes |
+| 19:00 | `☽ Off work`, about 11 minutes |
 
 ## Why this exists
 
@@ -66,13 +79,13 @@ To remove it cleanly, run `/function villagercd:uninstall` first — this delete
 - **The label does not update inside the trade GUI.** Minecraft sends a container's title once when it opens and never refreshes it; there is no command that can change it mid-screen. Close the screen to watch the timer tick. (A client-side mod would be required to fix this.)
 - Item names are shown in the player's own game language — `Golden Carrot` instead of `golden_carrot`. Items from other namespaces (mods) fall back to their raw id.
 - If several trades are locked at once, only the first one is named.
-- Every villager in the world is scanned once per second. Very large trading halls may cost a little tick time.
+- Labels only show for villagers within 48 blocks of a player. Farther away the label is removed, and it comes back as soon as someone is in range.
 
 ## How it works internally
 
 | File | Role |
 |---|---|
-| `tick_slow.mcfunction` | Self-rescheduling 1-second loop; also reaps orphaned labels |
+| `tick_slow.mcfunction` | Self-rescheduling 1-second loop; updates villagers within 48 blocks of a player and removes every other label |
 | `tick_villager.mcfunction` | Per-villager entry; resets state and dispatches |
 | `check_slot.mcfunction` | Recursive macro that walks every trade slot until it runs out |
 | `update_display.mcfunction` | Computes the countdown and picks which label to show |
@@ -108,6 +121,29 @@ datapack ส่วนใหญ่ที่แก้ปัญหาเรื่�
 สิ่งที่มันแก้ไม่ใช่ตัวกลไก แต่คือ**ข้อมูลที่เกมไม่เคยบอกเรา** — vanilla บอกแค่ว่าของหมด แล้วก็เงียบ ไม่บอกว่าจะกลับมาเมื่อไหร่ ไม่บอกว่ามันจะกลับมาได้ไหม หรือรอไปก็เท่านั้นเพราะ villager ตัวนั้นไม่มีที่ทำงานตั้งแต่แรก เราเลยต้องเดาเอาเอง
 
 ข้อมูลพวกนี้มีอยู่ในเกมอยู่แล้ว datapack นี้แค่เอามันขึ้นมาแสดงให้เห็น
+
+**ป้ายแต่ละสีหมายถึงอะไร**
+
+| ป้าย | ความหมาย |
+|---|---|
+| `⌛ Cooldown 4:47 · Stick` (เหลือง) | ติดคูลดาวน์ เกมยังไม่ยอมเติมของอีก 4:47 |
+| `☽ Off work 4:12 · Stick` (ฟ้า) | villager เลิกงานแล้ว ต้องรอถึงเวลางานถัดไป |
+| `⚒ Needs work · Stick` (ส้ม) | หมดคูลดาวน์แล้ว รอ villager เดินไปทำงานที่ job block |
+| `✖ No workstation · Stick` (แดง) | ไม่มี job block จะไม่เติมของเลย |
+| `✔ Ready` (เขียว) | เติมของแล้ว เทรดได้ |
+
+ชื่อไอเทมจะขึ้นตามภาษาที่ผู้เล่นตั้งในเกม
+
+**แต่ละช่วงเวลาควรเห็นป้ายอะไร** (villager ทำงาน 08:00–15:00 ในเกม)
+
+| เวลาในเกม | ป้ายที่ถูกต้อง |
+|---|---|
+| 07:00 (ก่อนเริ่มงาน) | `☽ Off work` เหลือไม่ถึง 1 นาที |
+| 12:00 (ในเวลางาน) | `⌛ Cooldown` หรือ `⚒ Needs work` |
+| 16:00 | `☽ Off work` ประมาณ 13 นาที |
+| 19:00 | `☽ Off work` ประมาณ 11 นาที |
+
+ป้ายจะแสดงเฉพาะ villager ที่อยู่ในระยะ 48 บล็อกจากผู้เล่น ถ้าไกลกว่านั้นป้ายจะหายไปเพื่อประหยัดเครื่อง และกลับมาเองเมื่อเดินเข้าใกล้
 
 **ติดตั้ง**: ก๊อปโฟลเดอร์ `villager_cooldown` ไปวางใน `<เวิลด์>/datapacks/` แล้วพิมพ์ `/reload` ในเกม
 

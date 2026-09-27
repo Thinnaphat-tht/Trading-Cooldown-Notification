@@ -8,4 +8,4 @@ to the moment the game will allow a restock.
 
 To uninstall: run `/function villagercd:uninstall`, then delete this folder.
 
-Full documentation: https://github.com/Thinnaphat/Trading-Cooldown
+Full documentation: https://github.com/Thinnaphat-tht/Trading-Cooldown-Notification

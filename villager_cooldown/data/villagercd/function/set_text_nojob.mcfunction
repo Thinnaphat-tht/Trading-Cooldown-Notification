@@ -1,1 +1,1 @@
-$data modify entity @s text set value {text:"Cooldowning: $(show)  (no workstation!)",color:"red"}
+$data modify entity @s text set value {text:"✖ No workstation · ",color:"red",extra:[{translate:"item.minecraft.$(show)",fallback:"%s",with:[{translate:"block.minecraft.$(show)",fallback:"$(show)"}]}]}

@@ -21,7 +21,21 @@ scoreboard players operation #remain vcd.calc -= #now vcd.calc
 execute if score #restocks vcd.calc matches 0 run scoreboard players set #remain vcd.calc 0
 execute if score #remain vcd.calc matches ..0 run scoreboard players set #remain vcd.calc 0
 
-scoreboard players operation #sec vcd.calc = #remain vcd.calc
+execute store result score #daytime vcd.calc run time query time
+scoreboard players operation #daytime vcd.calc %= #day_length vcd.const
+scoreboard players set #untilwork vcd.calc 0
+execute if score #daytime vcd.calc < #work_start vcd.const run scoreboard players operation #untilwork vcd.calc = #work_start vcd.const
+execute if score #daytime vcd.calc < #work_start vcd.const run scoreboard players operation #untilwork vcd.calc -= #daytime vcd.calc
+execute if score #daytime vcd.calc >= #work_end vcd.const run scoreboard players operation #untilwork vcd.calc = #next_start vcd.const
+execute if score #daytime vcd.calc >= #work_end vcd.const run scoreboard players operation #untilwork vcd.calc -= #daytime vcd.calc
+
+scoreboard players set #offwork vcd.calc 0
+execute if score #untilwork vcd.calc > #remain vcd.calc if data entity @s Brain.memories."minecraft:job_site" run scoreboard players set #offwork vcd.calc 1
+
+scoreboard players operation #wait vcd.calc = #remain vcd.calc
+execute if score #offwork vcd.calc matches 1 run scoreboard players operation #wait vcd.calc = #untilwork vcd.calc
+
+scoreboard players operation #sec vcd.calc = #wait vcd.calc
 scoreboard players operation #sec vcd.calc /= #20 vcd.const
 
 scoreboard players operation #min vcd.calc = #sec vcd.calc
@@ -32,10 +46,13 @@ scoreboard players operation #secmod vcd.calc %= #60 vcd.const
 
 execute store result storage villagercd:tmp min int 1 run scoreboard players get #min vcd.calc
 execute store result storage villagercd:tmp sec int 1 run scoreboard players get #secmod vcd.calc
+data modify storage villagercd:tmp pad set value ""
+execute if score #secmod vcd.calc matches ..9 run data modify storage villagercd:tmp pad set value "0"
 
 execute if score @s vcd.haslabel matches 0 run function villagercd:spawn_label
 
-execute if score @s vcd.state matches 1 if score #remain vcd.calc matches 1.. on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_cooling with storage villagercd:tmp
-execute if score @s vcd.state matches 1 if score #remain vcd.calc matches ..0 if data entity @s Brain.memories."minecraft:job_site" on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_waiting with storage villagercd:tmp
+execute if score @s vcd.state matches 1 if score #offwork vcd.calc matches 1 on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_offwork with storage villagercd:tmp
+execute if score @s vcd.state matches 1 if score #offwork vcd.calc matches 0 if score #remain vcd.calc matches 1.. on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_cooling with storage villagercd:tmp
+execute if score @s vcd.state matches 1 if score #offwork vcd.calc matches 0 if score #remain vcd.calc matches ..0 if data entity @s Brain.memories."minecraft:job_site" on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_waiting with storage villagercd:tmp
 execute if score @s vcd.state matches 1 if score #remain vcd.calc matches ..0 unless data entity @s Brain.memories."minecraft:job_site" on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_nojob with storage villagercd:tmp
 execute if score @s vcd.state matches 2 on passengers if entity @s[tag=vcd_label] run function villagercd:set_text_ready

@@ -16,10 +16,11 @@ Trade with a villager until an offer runs out of stock, and a floating label app
 
 | Label | Meaning |
 |---|---|
-| `Cooldowning: stick  4m 47s` | Locked. The game refuses to restock for another 4:47. |
-| `Cooldowning: stick  (needs to work)` | Locked. The wait is over, but the villager still has to walk to its job block to restock. |
-| `Cooldowning: stick  (no workstation!)` | Locked, and it will **never** restock — this villager has no job block claimed. |
-| `Ready` | Restocked. You can trade again. |
+| `⌛ Cooldown 4:47 · Stick` (yellow) | Locked. The game refuses to restock for another 4:47. |
+| `☽ Off work 4:12 · Stick` (aqua) | Locked, and the villager is off shift. It can only restock once its workday starts (8:00 in-game), 4:12 from now. |
+| `⚒ Needs work · Stick` (gold) | Locked. The wait is over, but the villager still has to walk to its job block to restock. |
+| `✖ No workstation · Stick` (red) | Locked, and it will **never** restock — this villager has no job block claimed. |
+| `✔ Ready` (green) | Restocked. You can trade again. |
 
 The item name shown is the meaningful half of the trade: whichever side of the deal isn't emeralds.
 
@@ -63,7 +64,7 @@ To remove it cleanly, run `/function villagercd:uninstall` first — this delete
 ## Known limitations
 
 - **The label does not update inside the trade GUI.** Minecraft sends a container's title once when it opens and never refreshes it; there is no command that can change it mid-screen. Close the screen to watch the timer tick. (A client-side mod would be required to fix this.)
-- Item names are shown as raw ids with the namespace stripped: `golden_carrot`, not `Golden Carrot`. Vanilla commands cannot transform strings beyond substrings.
+- Item names are shown in the player's own game language — `Golden Carrot` instead of `golden_carrot`. Items from other namespaces (mods) fall back to their raw id.
 - If several trades are locked at once, only the first one is named.
 - Every villager in the world is scanned once per second. Very large trading halls may cost a little tick time.
 

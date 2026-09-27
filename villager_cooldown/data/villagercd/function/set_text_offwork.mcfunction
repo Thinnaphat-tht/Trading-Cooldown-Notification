@@ -1,0 +1,1 @@
+$data modify entity @s text set value {text:"☽ Off work $(min):$(pad)$(sec) · ",color:"aqua",extra:[{translate:"item.minecraft.$(show)",fallback:"%s",with:[{translate:"block.minecraft.$(show)",fallback:"$(show)"}]}]}
